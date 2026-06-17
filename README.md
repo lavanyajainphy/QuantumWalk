@@ -1,1 +1,1 @@
-# DTQW
+# Quantum Walk
