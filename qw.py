@@ -3,7 +3,7 @@ def qw1d(n, coin, initState):
     
     import numpy as np
     import matplotlib.pyplot as plt
-
+    
     L = 2*n + 1
     center = L//2
 
