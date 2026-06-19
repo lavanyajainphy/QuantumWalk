@@ -9,10 +9,6 @@ def qw1d(n, coin, initState):
 
     psi = np.zeros((L, 2, 1), dtype=complex)
     psi[center] = initState
-    #psi[center] = np.array([[1], [0]])
-    #psi[center] = np.array([[1 / np.sqrt(2)], [1j / np.sqrt(2)]])
-
-    #H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
 
     msd_list = []
 
@@ -57,12 +53,7 @@ def qw2d(n, coin, initState):
 
     psi = np.zeros((L, L, 4), dtype=complex)
     psi[center] = initState
-    #psi[center] = np.array([1, 0, 0, 0])
-    #psi[center] = 0.5 * np.array([1, 1, 1, 1])
-
-    #H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
-    #C = np.kron(H, H) 
-
+    
     msd_list = []
 
     for _ in range(n):
@@ -119,11 +110,6 @@ def qw3d(n, coin, initState):
 
     psi = np.zeros((L, L, L, 8), dtype=complex)
     psi[center] = initState
-    #psi[center] = np.array([1, 0, 0, 0, 0, 0, 0, 0])
-
-    #H = np.array([[1, 1], [1, -1]]) / np.sqrt(2)
-    #H2 = np.kron(H, H)
-    #C = np.kron(H2, H)
 
     msd_list = []
 
