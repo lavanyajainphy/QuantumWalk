@@ -4,22 +4,18 @@ def rw1dreset(n, reset_r):
     import numpy as np
     import random
 
-    x = np.zeros(n)
     n_simulations = 1000
     position = np.zeros((n_simulations, n))
     for i in range(n_simulations):
         for j in range (1, n):
             if np.random.random() < reset_r:
-                x[i]= 0
                 step = 0
                 position[i,j] = 0
                 continue
             direction = random.randint(1, 2)
             if direction == 1:
-                x[i]= x[i-1]+1
                 step = 1
             else:
-                x[i]= x[i-1]-1
                 step = -1
             position[i, j] = position[i, j-1] + step
 
@@ -31,7 +27,6 @@ def rw1dreset(n, reset_r):
 
     np.savez(
         filename,
-        x=x,
         msd=np.array(msd)
     )
 
@@ -48,6 +43,7 @@ def rw2dreset(n, reset_r):
         for j in range (1, n):
             if np.random.random() < reset_r:
                 x[i, j]= 0
+                y[i, j]= 0
                 continue
             direction = random.randint(1, 4)
             if direction == 1:
@@ -72,6 +68,7 @@ def rw2dreset(n, reset_r):
     np.savez(
         filename,
         x=x,
+        y=y,
         msd=np.array(msd)
     )
 
@@ -88,6 +85,8 @@ def rw3dreset(n, reset_r):
         for j in range (1, n):
             if np.random.random() < reset_r:
                 x[i, j]= 0
+                y[i, j]= 0
+                z[i, j]= 0
                 continue
             direction = random.randint(1, 6)
             if direction == 1:
@@ -124,5 +123,7 @@ def rw3dreset(n, reset_r):
     np.savez(
         filename,
         x=x,
+        y=y,
+        z=z,
         msd=np.array(msd)
     )
