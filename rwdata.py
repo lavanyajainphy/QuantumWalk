@@ -2,7 +2,6 @@
 def rw1d(n):
     import numpy as np
     import random
-    x = np.zeros(n)
 
     n_simulations = 1000
     position = np.zeros((n_simulations, n))
@@ -10,10 +9,8 @@ def rw1d(n):
         for j in range (1, n):
             direction = random.randint(1, 2)
             if direction == 1:
-                x[i]= x[i-1]+1
                 step = 1
             else:
-                x[i]= x[i-1]-1
                 step = -1
             position[i, j] = position[i, j-1] + step
 
@@ -25,7 +22,6 @@ def rw1d(n):
 
     np.savez(
         filename,
-        x=x,
         msd=np.array(msd)
     )
 
@@ -62,6 +58,7 @@ def rw2d(n):
     np.savez(
         filename,
         x=x,
+        y=y,
         msd=np.array(msd)
     )
 
@@ -111,5 +108,7 @@ def rw3d(n):
     np.savez(
         filename,
         x=x,
+        y=y,
+        z=z,
         msd=np.array(msd)
     )
