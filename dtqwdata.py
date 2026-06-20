@@ -25,7 +25,10 @@ def qw1d(n, coin, initState):
 
         prob = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
         prob_list.append(prob)
-        msd = np.sum(x**2 * prob)
+        
+        mean = np.sum(x * prob)
+        msd = np.sum(x**2 * prob) - mean**2
+        #msd = np.sum(x**2 * prob)
         msd_list.append(msd)
 
     filename = f"qwalk1d_n{n}.npz"
@@ -72,7 +75,11 @@ def qw2d(n, coin, initState):
         
         Px = prob.sum(axis=1)
         Py = prob.sum(axis=0)
-        msd = np.sum(x**2 * Px) + np.sum(y**2 * Py)
+
+        mean_x = np.sum(x * Px)
+        mean_y = np.sum(y * Py)
+        msd = (np.sum(x**2 * Px) - mean_x**2) + (np.sum(y**2 * Py) - mean_y**2)
+        #msd = np.sum(x**2 * Px) + np.sum(y**2 * Py)
     
         msd_list.append(msd)
 
@@ -125,7 +132,11 @@ def qw3d(n, coin, initState):
         Px = prob.sum(axis=(1,2))
         Py = prob.sum(axis=(0,2))
         Pz = prob.sum(axis=(0,1))
-        msd = np.sum(x**2 * Px) + np.sum(y**2 * Py) + np.sum(z**2 * Pz)
+        mean_x = np.sum(x * Px)
+        mean_y = np.sum(y * Py)
+        mean_z = np.sum(z * Pz)
+        msd = (np.sum(x**2 * Px) - mean_x**2) + (np.sum(y**2 * Py) - mean_y**2) + (np.sum(z**2 * Pz) - mean_z**2)
+        #msd = np.sum(x**2 * Px) + np.sum(y**2 * Py) + np.sum(z**2 * Pz)
     
         msd_list.append(msd)
 
