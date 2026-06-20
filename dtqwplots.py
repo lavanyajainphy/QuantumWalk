@@ -137,9 +137,9 @@ def qw3d(n, coin, initState):
         y = np.arange(-n, n+1)
         z = np.arange(-n, n+1)
 
-        Px = prob.sum(axis=1)
-        Py = prob.sum(axis=0)
-        Pz = prob.sum(axis=2)
+        Px = prob.sum(axis=(1,2))
+        Py = prob.sum(axis=(0,2))
+        Pz = prob.sum(axis=(0,1))
         mean_x = np.sum(x * Px)
         mean_y = np.sum(y * Py)
         mean_z = np.sum(z * Pz)
