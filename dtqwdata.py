@@ -9,6 +9,7 @@ def qw1d(n, coin, initState):
     psi = np.zeros((L, 2, 1), dtype=complex)
     psi[center] = initState
 
+    x = np.arange(-n, n+1, 1)
     msd_list = []
 
     for _ in range(n):
@@ -22,7 +23,6 @@ def qw1d(n, coin, initState):
         psi[:-1, 1, 0] = psi_prev [1:, 1, 0]
 
         prob = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
-        x = np.arange(-n, n+1, 1)
         mean = np.sum(x * prob)
         msd = np.sum(x**2 * prob) - mean**2
         msd_list.append(msd)
@@ -49,6 +49,9 @@ def qw2d(n, coin, initState):
     psi = np.zeros((L, L, 4), dtype=complex)
     psi[center] = initState
 
+    
+    x = np.arange(-n, n+1)
+    y = np.arange(-n, n+1)
     msd_list = []
 
     for _ in range(n):
@@ -65,9 +68,6 @@ def qw2d(n, coin, initState):
         psi[:-1, :-1, 3] = psi_prev[1:, 1:, 3] #down down
 
         prob = np.sum(np.abs(psi)**2, axis = 2)
-
-        x = np.arange(-n, n+1)
-        y = np.arange(-n, n+1)
 
         Px = prob.sum(axis=1)
         Py = prob.sum(axis=0)
@@ -97,6 +97,9 @@ def qw3d(n, coin, initState):
     psi = np.zeros((L, L, L, 8), dtype=complex)
     psi[center] = initState
 
+    x = np.arange(-n, n+1)
+    y = np.arange(-n, n+1)
+    z = np.arange(-n, n+1)
     msd_list = []
 
     for _ in range(n):
@@ -118,10 +121,6 @@ def qw3d(n, coin, initState):
         psi[:-1, :-1, :-1, 7] = psi_prev[1:, 1:, 1:, 7] #down down down
 
         prob = np.sum(np.abs(psi)**2, axis = 3)
-
-        x = np.arange(-n, n+1)
-        y = np.arange(-n, n+1)
-        z = np.arange(-n, n+1)
 
         Px = prob.sum(axis=(1,2))
         Py = prob.sum(axis=(0,2))
