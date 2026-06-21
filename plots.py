@@ -7,8 +7,7 @@ def plot_msd(files, labels, title):
 
     for file, label in zip(files, labels):
         msd = np.load(file)["msd"]
-        steps = np.arange(1, len(msd) + 1)
-        plt.loglog(steps, msd, label=label)
+        plt.loglog(msd, label=label)
 
     plt.xlabel("Number of steps")
     plt.ylabel("Mean square displacement")
