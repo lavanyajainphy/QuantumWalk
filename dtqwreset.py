@@ -1,9 +1,11 @@
 #quantum walk in 1d with stochastic reset to origin
-def qw1dresetorigin(n, coin, initState, reset_r, n_simulations):
+def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     
     import numpy as np
-    import matplotlib.pyplot as plt
 
+    if initState is None:
+        initState = initState1d = np.array([[1], [0]])
+    
     L = 2*n + 1
     center = L//2
 
@@ -55,11 +57,13 @@ def qw1dresetorigin(n, coin, initState, reset_r, n_simulations):
     )
 
 #quantum walk in 2d with stochastic reset to origin
-def qw2dresetorigin(n, coin, initState, reset_r, n_simulations):
+def qw2dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     
     import numpy as np
-    import matplotlib.pyplot as plt
 
+    if initState is None:
+        initState = np.array([1, 0, 0, 0])
+    
     L = 2*n + 1
     center = L//2, L//2
 
@@ -119,12 +123,13 @@ def qw2dresetorigin(n, coin, initState, reset_r, n_simulations):
     )
 
 #quantum walk in 3d with stochastic reset to origin
-def qw3dresetorigin(n, coin, initState, reset_r, n_simulations):
+def qw3dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     
     import numpy as np
-    import matplotlib.pyplot as plt
-    from mpl_toolkits import mplot3d
 
+    if initState is None:
+        initState = np.array([1, 0, 0, 0, 0, 0, 0, 0])
+    
     L = 2*n + 1
     center = L//2, L//2, L//2
 
