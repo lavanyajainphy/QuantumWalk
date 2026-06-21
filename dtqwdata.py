@@ -87,6 +87,7 @@ def qw2d(n, coin, initState):
     np.savez(
         filename,
         x=x,
+        y=y,
         prob=np.array(prob_list),
         msd=np.array(msd_list)
     )
@@ -144,6 +145,8 @@ def qw3d(n, coin, initState):
     np.savez(
         filename,
         x=x,
+        y=y,
+        z=z,
         prob=np.array(prob_list),
         msd=np.array(msd_list)
     )
