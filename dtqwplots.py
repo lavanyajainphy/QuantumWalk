@@ -12,6 +12,7 @@ def qw1d(n, coin, initState):
 
     x = np.arange(-n, n+1, 1)
     msd_list = []
+    var_list = []
 
     for _ in range(n):
 
@@ -25,8 +26,9 @@ def qw1d(n, coin, initState):
 
         prob = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
         mean = np.sum(x * prob)
-        msd = np.sum(x**2 * prob) - mean**2
-        #msd = np.sum(x**2 * prob)
+        var = np.sum(x**2 * prob) - mean**2
+        var_list.append(var)
+        msd = np.sum(x**2 * prob)
         msd_list.append(msd)
 
     plt.plot(x, prob)
@@ -36,10 +38,12 @@ def qw1d(n, coin, initState):
     plt.show()
 
     plt.figure()
-    plt.plot(range(1, n+1), msd_list)
+    plt.loglog(range(1, n+1), msd_list, label="MSD about Origin")
+    plt.loglog(range(1, n+1), var_list, label="MSD about Mean")
     plt.xlabel("number of steps")
     plt.ylabel("mean square displacement")
     plt.title("Mean Square Displacement in 1D Quantum Walk")
+    plt.legend()
     plt.show()
 
 #quantum walk in 2d
