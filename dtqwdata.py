@@ -73,8 +73,8 @@ def qw2d(n, coin, initState):
         prob = np.sum(np.abs(psi)**2, axis = 2)
         prob_list.append(prob)
         
-        Px = prob.sum(axis=1)
-        Py = prob.sum(axis=0)
+        Px = prob.sum(axis=0)
+        Py = prob.sum(axis=1)
 
         mean_x = np.sum(x * Px)
         mean_y = np.sum(y * Py)
