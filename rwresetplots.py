@@ -1,5 +1,5 @@
 #random walk in 1d with stochastic resetting
-def rw1dreset(n, reset_r):
+def rw1dreset(n, reset_r, n_simulations):
 
     import numpy as np
     import matplotlib.pyplot as plt
@@ -30,13 +30,12 @@ def rw1dreset(n, reset_r):
     plt.show()
 
 #random walk in 2d with stochastic resetting
-def rw2dreset(n, reset_r):
+def rw2dreset(n, reset_r, n_simulations):
 
     import numpy as np
     import matplotlib.pyplot as plt
     import random
-
-    n_simulations = 1000
+    
     x = np.zeros((n_simulations, n))
     y = np.zeros((n_simulations, n))
     for i in range(n_simulations):
@@ -69,13 +68,12 @@ def rw2dreset(n, reset_r):
     plt.show()
 
 #random walk in 3d with stochastic resetting
-def rw3dreset(n, reset_r):
+def rw3dreset(n, reset_r, n_simulations):
     import numpy as np
     import matplotlib.pyplot as plt
     from mpl_toolkits import mplot3d
     import random
 
-    n_simulations = 1000
     x = np.zeros((n_simulations, n))
     y = np.zeros((n_simulations, n))
     z = np.zeros((n_simulations, n))
