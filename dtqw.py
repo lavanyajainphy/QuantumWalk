@@ -58,6 +58,7 @@ def qw2d(n, coin, initState):
     x = np.arange(-n, n+1)
     y = np.arange(-n, n+1)
     msd_list = []
+    var_list = []
     prob_list = []
 
     for _ in range(n):
@@ -81,10 +82,11 @@ def qw2d(n, coin, initState):
 
         mean_x = np.sum(x * Px)
         mean_y = np.sum(y * Py)
-        msd = (np.sum(x**2 * Px) - mean_x**2) + (np.sum(y**2 * Py) - mean_y**2)
-        #msd = np.sum(x**2 * Px) + np.sum(y**2 * Py)
+        var = (np.sum(x**2 * Px) - mean_x**2) + (np.sum(y**2 * Py) - mean_y**2)
+        msd = np.sum(x**2 * Px) + np.sum(y**2 * Py)
     
         msd_list.append(msd)
+        var_list.append(var)
 
     filename = f"qwalk2d_n{n}.npz"
     np.savez(
@@ -92,7 +94,8 @@ def qw2d(n, coin, initState):
         x=x,
         y=y,
         prob=np.array(prob_list),
-        msd=np.array(msd_list)
+        msd=np.array(msd_list),
+        var=np.array(var_list)
     )
 
 #quantum walk in 3d
@@ -110,6 +113,7 @@ def qw3d(n, coin, initState):
     y = np.arange(-n, n+1)
     z = np.arange(-n, n+1)
     msd_list = []
+    var_list = []
     prob_list = []
     
     for _ in range(n):
@@ -139,10 +143,11 @@ def qw3d(n, coin, initState):
         mean_x = np.sum(x * Px)
         mean_y = np.sum(y * Py)
         mean_z = np.sum(z * Pz)
-        msd = (np.sum(x**2 * Px) - mean_x**2) + (np.sum(y**2 * Py) - mean_y**2) + (np.sum(z**2 * Pz) - mean_z**2)
-        #msd = np.sum(x**2 * Px) + np.sum(y**2 * Py) + np.sum(z**2 * Pz)
+        var = (np.sum(x**2 * Px) - mean_x**2) + (np.sum(y**2 * Py) - mean_y**2) + (np.sum(z**2 * Pz) - mean_z**2)
+        msd = np.sum(x**2 * Px) + np.sum(y**2 * Py) + np.sum(z**2 * Pz)
     
         msd_list.append(msd)
+        var_list.append(var)
 
     filename = f"qwalk3d_n{n}.npz"
     np.savez(
@@ -151,5 +156,6 @@ def qw3d(n, coin, initState):
         y=y,
         z=z,
         prob=np.array(prob_list),
-        msd=np.array(msd_list)
+        msd=np.array(msd_list),
+        var=np.array(var_list)
     )
