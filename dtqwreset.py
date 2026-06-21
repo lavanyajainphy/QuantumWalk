@@ -179,7 +179,7 @@ def qw3dresetorigin(n, coin, initState, reset_r, n_simulations):
 
     msd_list /= n_simulations
     var_list /= n_simulations
-
+    
     filename = f"qwalk3dreset_n{n}_nsim{n_simulations}_origin.npz"
 
     np.savez(
