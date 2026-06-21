@@ -1,8 +1,11 @@
 #quantum walk in 1d
-def qw1d(n, coin, initState):
+def qw1d(n, coin, initState=None):
     
     import numpy as np
 
+    if initState is None:
+        initState = initState1d = np.array([[1], [0]])
+    
     L = 2*n + 1
     center = L//2
 
@@ -45,10 +48,13 @@ def qw1d(n, coin, initState):
 
 
 #quantum walk in 2d
-def qw2d(n, coin, initState):
+def qw2d(n, coin, initState=None):
     
     import numpy as np
 
+    if initState is None:
+        initState = np.array([1, 0, 0, 0])
+    
     L = 2*n + 1
     center = L//2, L//2
 
@@ -99,10 +105,13 @@ def qw2d(n, coin, initState):
     )
 
 #quantum walk in 3d
-def qw3d(n, coin, initState):
+def qw3d(n, coin, initState=None):
 
     import numpy as np
 
+    if initState is None:
+        initState = np.array([1, 0, 0, 0, 0, 0, 0, 0])
+    
     L = 2*n + 1
     center = L//2, L//2, L//2
 
