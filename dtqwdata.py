@@ -11,6 +11,7 @@ def qw1d(n, coin, initState):
 
     x = np.arange(-n, n+1, 1)
     msd_list = []
+    var_list = []
     prob_list = []
 
     for _ in range(n):
@@ -27,8 +28,9 @@ def qw1d(n, coin, initState):
         prob_list.append(prob)
         
         mean = np.sum(x * prob)
-        msd = np.sum(x**2 * prob) - mean**2
-        #msd = np.sum(x**2 * prob)
+        var = np.sum(x**2 * prob) - mean**2
+        var_list.append(var)
+        msd = np.sum(x**2 * prob)
         msd_list.append(msd)
 
     filename = f"qwalk1d_n{n}.npz"
@@ -37,6 +39,7 @@ def qw1d(n, coin, initState):
         filename,
         x=x,
         prob=np.array(prob_list),
+        var=np.array(var_list),
         msd=np.array(msd_list)
     )
 
