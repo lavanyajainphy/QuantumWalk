@@ -1,10 +1,9 @@
 #random walk in 1d
-def rw1d(n):
+def rw1d(n, n_simulations):
     import numpy as np
     import matplotlib.pyplot as plt
     import random
 
-    n_simulations = 1000
     position = np.zeros((n_simulations, n))
     for i in range(n_simulations):
         for j in range (1, n):
@@ -25,12 +24,11 @@ def rw1d(n):
     plt.show()
 
 #random walk in 2d
-def rw2d(n):
+def rw2d(n, n_simulations):
     import numpy as np
     import matplotlib.pyplot as plt
     import random
 
-    n_simulations = 1000
     x = np.zeros((n_simulations, n))
     y = np.zeros((n_simulations, n))
     for i in range(n_simulations):
@@ -59,13 +57,12 @@ def rw2d(n):
     plt.show()
 
 #random walk in 3d
-def rw3d(n):
+def rw3d(n, n_simulations):
     import numpy as np
     import matplotlib.pyplot as plt
     from mpl_toolkits import mplot3d
     import random
 
-    n_simulations = 1000
     x = np.zeros((n_simulations, n))
     y = np.zeros((n_simulations, n))
     z = np.zeros((n_simulations, n))
