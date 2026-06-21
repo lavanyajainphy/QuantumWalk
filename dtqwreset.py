@@ -9,6 +9,7 @@ def qw1dresetorigin(n, coin, initState, reset_r, n_simulations):
 
     x = np.arange(-n, n+1, 1)
     msd_list = np.zeros(n)
+    var_list = np.zeros(n)
     prob_avg = np.zeros(L)
 
     for m in range(n_simulations):
@@ -35,11 +36,13 @@ def qw1dresetorigin(n, coin, initState, reset_r, n_simulations):
             prob_avg += prob
 
             mean = np.sum(x * prob)
-            msd = np.sum(x**2 * prob) - mean**2
-            #msd = np.sum(x**2 * prob)
+            var = np.sum(x**2 * prob) - mean**2
+            msd = np.sum(x**2 * prob)
             msd_list [t] += msd
+            var_list [t] += var
 
     msd_list /= n_simulations
+    var_list /= n_simulations
 
     filename = f"qwalk1dreset_n{n}_nsim{n_simulations}_origin.npz"
 
@@ -47,7 +50,8 @@ def qw1dresetorigin(n, coin, initState, reset_r, n_simulations):
         filename,
         x=x,
         prob=np.array(prob_avg),
-        msd=np.array(msd_list)
+        msd=np.array(msd_list),
+        var=np.array(var_list)
     )
 
 #quantum walk in 2d with stochastic reset to origin
@@ -62,6 +66,7 @@ def qw2dresetorigin(n, coin, initState, reset_r, n_simulations):
     x = np.arange(-n, n+1)
     y = np.arange(-n, n+1)
     msd_list = np.zeros(n)
+    var_list = np.zeros(n)
     prob_avg = np.zeros((L, L))
 
     for m in range(n_simulations):
@@ -89,16 +94,18 @@ def qw2dresetorigin(n, coin, initState, reset_r, n_simulations):
 
             prob = np.sum(np.abs(psi)**2, axis = 2)
             prob_avg += prob
-            Px = prob.sum(axis=0)
-            Py = prob.sum(axis=1)
+            Px = prob.sum(axis=1)
+            Py = prob.sum(axis=0)
 
             mean_x = np.sum(x * Px)
             mean_y = np.sum(y * Py)
-            msd = (np.sum(x**2 * Px) - mean_x**2) + (np.sum(y**2 * Py) - mean_y**2)
-            #msd = np.sum(x**2 * Px) + np.sum(y**2 * Py)
+            var = (np.sum(x**2 * Px) - mean_x**2) + (np.sum(y**2 * Py) - mean_y**2)
+            msd = np.sum(x**2 * Px) + np.sum(y**2 * Py)
+            var_list [t] += var
             msd_list [t] += msd
 
     msd_list /= n_simulations
+    var_list /= n_simulations
 
     filename = f"qwalk2dreset_n{n}_nsim{n_simulations}_origin.npz"
 
@@ -107,7 +114,8 @@ def qw2dresetorigin(n, coin, initState, reset_r, n_simulations):
         x=x,
         y=y,
         prob=np.array(prob_avg),
-        msd=np.array(msd_list)
+        msd=np.array(msd_list),
+        var=np.array(var_list)
     )
 
 #quantum walk in 3d with stochastic reset to origin
@@ -124,6 +132,7 @@ def qw3dresetorigin(n, coin, initState, reset_r, n_simulations):
     y = np.arange(-n, n+1)
     z = np.arange(-n, n+1)
     msd_list = np.zeros(n)
+    var_list = np.zeros(n)
     prob_avg = np.zeros((L, L, L))
 
     for m in range(n_simulations):
@@ -154,20 +163,22 @@ def qw3dresetorigin(n, coin, initState, reset_r, n_simulations):
                 psi[:-1, 1:, :-1, 6] = psi_prev[1:, :-1, 1:, 6] #down up down
                 psi[:-1, :-1, :-1, 7] = psi_prev[1:, 1:, 1:, 7] #down down down
 
-                prob = np.sum(np.abs(psi)**2, axis = 3)
-                prob_avg += prob
-                Px = prob.sum(axis=(1,2))
-                Py = prob.sum(axis=(0,2))
-                Pz = prob.sum(axis=(0,1))
+            prob = np.sum(np.abs(psi)**2, axis = 3)
+            prob_avg += prob
+            Px = prob.sum(axis=(1,2))
+            Py = prob.sum(axis=(0,2))
+            Pz = prob.sum(axis=(0,1))
 
-                mean_x = np.sum(x * Px)
-                mean_y = np.sum(y * Py)
-                mean_z = np.sum(z * Pz)
-                msd = (np.sum(x**2 * Px) - mean_x**2) + (np.sum(y**2 * Py) - mean_y**2) + (np.sum(z**2 * Pz) - mean_z**2)
-                #msd = np.sum(x**2 * Px) + np.sum(y**2 * Py) + np.sum(z**2 * Pz)
-                msd_list [t] += msd
+            mean_x = np.sum(x * Px)
+            mean_y = np.sum(y * Py)
+            mean_z = np.sum(z * Pz)
+            var = (np.sum(x**2 * Px) - mean_x**2) + (np.sum(y**2 * Py) - mean_y**2) + (np.sum(z**2 * Pz) - mean_z**2)
+            msd = np.sum(x**2 * Px) + np.sum(y**2 * Py) + np.sum(z**2 * Pz)
+            var_list [t] += var
+            msd_list [t] += msd
 
     msd_list /= n_simulations
+    var_list /= n_simulations
 
     filename = f"qwalk3dreset_n{n}_nsim{n_simulations}_origin.npz"
 
@@ -177,5 +188,6 @@ def qw3dresetorigin(n, coin, initState, reset_r, n_simulations):
         y=y,
         z=z,
         prob=np.array(prob_avg),
-        msd=np.array(msd_list)
+        msd=np.array(msd_list),
+        var=np.array(var_list)
     )
