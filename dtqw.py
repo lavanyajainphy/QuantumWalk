@@ -15,7 +15,6 @@ def qw1d(n, coin, initState=None):
     x = np.arange(-n, n+1, 1)
     msd_list = []
     var_list = []
-    prob_list = []
 
     for _ in range(n):
 
@@ -28,8 +27,6 @@ def qw1d(n, coin, initState=None):
         psi[:-1, 1, 0] = psi_prev [1:, 1, 0]
 
         prob = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
-        prob_list.append(prob)
-        
         mean = np.sum(x * prob)
         var = np.sum(x**2 * prob) - mean**2
         var_list.append(var)
@@ -41,7 +38,7 @@ def qw1d(n, coin, initState=None):
     np.savez(
         filename,
         x=x,
-        prob=np.array(prob_list),
+        prob=prob,
         var=np.array(var_list),
         msd=np.array(msd_list)
     )
@@ -65,7 +62,6 @@ def qw2d(n, coin, initState=None):
     y = np.arange(-n, n+1)
     msd_list = []
     var_list = []
-    prob_list = []
 
     for _ in range(n):
 
@@ -80,9 +76,7 @@ def qw2d(n, coin, initState=None):
         psi[:-1, 1:, 2] = psi_prev[1:, :-1, 2] #down up
         psi[:-1, :-1, 3] = psi_prev[1:, 1:, 3] #down down
 
-        prob = np.sum(np.abs(psi)**2, axis = 2)
-        prob_list.append(prob)
-        
+        prob = np.sum(np.abs(psi)**2, axis = 2)        
         Px = prob.sum(axis=1)
         Py = prob.sum(axis=0)
 
@@ -99,7 +93,7 @@ def qw2d(n, coin, initState=None):
         filename,
         x=x,
         y=y,
-        prob=np.array(prob_list),
+        prob=prob,
         msd=np.array(msd_list),
         var=np.array(var_list)
     )
@@ -123,7 +117,6 @@ def qw3d(n, coin, initState=None):
     z = np.arange(-n, n+1)
     msd_list = []
     var_list = []
-    prob_list = []
     
     for _ in range(n):
 
@@ -144,8 +137,6 @@ def qw3d(n, coin, initState=None):
         psi[:-1, :-1, :-1, 7] = psi_prev[1:, 1:, 1:, 7] #down down down
 
         prob = np.sum(np.abs(psi)**2, axis = 3)
-        prob_list.append(prob)
-
         Px = prob.sum(axis=(1,2))
         Py = prob.sum(axis=(0,2))
         Pz = prob.sum(axis=(0,1))
@@ -164,7 +155,7 @@ def qw3d(n, coin, initState=None):
         x=x,
         y=y,
         z=z,
-        prob=np.array(prob_list),
+        prob=prob,
         msd=np.array(msd_list),
         var=np.array(var_list)
     )
