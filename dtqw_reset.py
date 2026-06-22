@@ -35,14 +35,16 @@ def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
                 psi[:-1, 1, 0] = psi_prev [1:, 1, 0]
 
             prob = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
-            prob_avg += prob
-
             mean = np.sum(x * prob)
             var = np.sum(x**2 * prob) - mean**2
             msd = np.sum(x**2 * prob)
             msd_list [t] += msd
             var_list [t] += var
 
+        prob_final = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
+        prob_avg += prob_final
+
+    prob_avg /= n_simulations
     msd_list /= n_simulations
     var_list /= n_simulations
 
@@ -97,7 +99,6 @@ def qw2dresetorigin(n, coin, reset_r, n_simulations, initState=None):
                 psi[:-1, :-1, 3] = psi_prev[1:, 1:, 3] #down down
 
             prob = np.sum(np.abs(psi)**2, axis = 2)
-            prob_avg += prob
             Px = prob.sum(axis=1)
             Py = prob.sum(axis=0)
 
@@ -107,7 +108,11 @@ def qw2dresetorigin(n, coin, reset_r, n_simulations, initState=None):
             msd = np.sum(x**2 * Px) + np.sum(y**2 * Py)
             var_list [t] += var
             msd_list [t] += msd
+            
+        prob_final = np.sum(np.abs(psi)**2, axis = 2)
+        prob_avg += prob_final
 
+    prob_avg /= n_simulations
     msd_list /= n_simulations
     var_list /= n_simulations
 
@@ -169,7 +174,6 @@ def qw3dresetorigin(n, coin, reset_r, n_simulations, initState=None):
                 psi[:-1, :-1, :-1, 7] = psi_prev[1:, 1:, 1:, 7] #down down down
 
             prob = np.sum(np.abs(psi)**2, axis = 3)
-            prob_avg += prob
             Px = prob.sum(axis=(1,2))
             Py = prob.sum(axis=(0,2))
             Pz = prob.sum(axis=(0,1))
@@ -181,7 +185,11 @@ def qw3dresetorigin(n, coin, reset_r, n_simulations, initState=None):
             msd = np.sum(x**2 * Px) + np.sum(y**2 * Py) + np.sum(z**2 * Pz)
             var_list [t] += var
             msd_list [t] += msd
+            
+        prob_final = np.sum(np.abs(psi)**2, axis = 3)
+        prob_avg += prob_final
 
+    prob_avg /= n_simulations
     msd_list /= n_simulations
     var_list /= n_simulations
     
