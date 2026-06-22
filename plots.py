@@ -20,7 +20,7 @@ def plot_var(files, labels, title):
     import matplotlib.pyplot as plt
 
     for file, label in zip(files, labels):
-        msd = np.load(file)["var"]
+        var = np.load(file)["var"]
         plt.loglog(var, label=label)
 
     plt.xlabel("Number of steps")
