@@ -376,7 +376,7 @@ def qw3dresetmpp(n, coin, reset_r, n_simulations, initState=None):
                 k = zs[max]
                 psi = np.zeros((L, L, L, 8), dtype=complex)
                 psi[i, j, k] = initState
-                print(f"Reset at {t} step for {m} walker at ({x[max]}, {y[max]}, {z[max]})")
+                print(f"Reset at {t} step for {m} walker at ({x[i]}, {y[j]}, {z[k]})")
 
             else:
                 for i in range(L):
