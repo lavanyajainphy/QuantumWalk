@@ -4,7 +4,7 @@ def qw1d(n, coin, initState=None):
     import numpy as np
 
     if initState is None:
-        initState = initState1d = np.array([[1], [0]])
+        initState = np.array([[1], [0]])
     
     L = 2*n + 1
     center = L//2
