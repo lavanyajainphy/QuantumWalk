@@ -28,7 +28,7 @@ def rw1dreset(n, reset_r, n_simulations):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"rwalk1dreset_n{n}.npz"
+    filename = f"rwalk1dreset_n{n}_nsim{n_simulations}_reset{reset_r}.npz"
 
     np.savez(
         filename,
@@ -74,7 +74,7 @@ def rw2dreset(n, reset_r, n_simulations):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"rwalk2dreset_n{n}.npz"
+    filename = f"rwalk2dreset_n{n}_nsim{n_simulations}_reset{reset_r}.npz"
 
     np.savez(
         filename,
@@ -135,7 +135,7 @@ def rw3dreset(n, reset_r, n_simulations):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"rwalk3dreset_n{n}.npz"
+    filename = f"rwalk3dreset_n{n}_nsim{n_simulations}_reset{reset_r}.npz"
 
     np.savez(
         filename,
