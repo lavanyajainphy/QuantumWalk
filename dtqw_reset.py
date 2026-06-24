@@ -2,6 +2,9 @@
 def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     
     import numpy as np
+    import time
+
+    start_time = time.time()
 
     if initState is None:
         initState = np.array([[1], [0]])
@@ -48,6 +51,9 @@ def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     msd_list /= n_simulations
     var_list /= n_simulations
 
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
+
     filename = f"qwalk1dreset_n{n}_nsim{n_simulations}_origin.npz"
 
     np.savez(
@@ -55,13 +61,17 @@ def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
         x=x,
         prob=np.array(prob_avg),
         msd=np.array(msd_list),
-        var=np.array(var_list)
+        var=np.array(var_list),
+        runtime=runtime
     )
 
 #quantum walk in 1d with stochastic reset to most probable position (mpp)
 def qw1dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     
     import numpy as np
+    import time
+
+    start_time = time.time()
 
     if initState is None:
         initState = np.array([[1], [0]])
@@ -112,6 +122,9 @@ def qw1dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     msd_list /= n_simulations
     var_list /= n_simulations
 
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
+
     filename = f"qwalk1dreset_n{n}_nsim{n_simulations}_mpp.npz"
 
     np.savez(
@@ -119,13 +132,17 @@ def qw1dresetmpp(n, coin, reset_r, n_simulations, initState=None):
         x=x,
         prob=np.array(prob_avg),
         msd=np.array(msd_list),
-        var=np.array(var_list)
+        var=np.array(var_list),
+        runtime=runtime
     )
 
 #quantum walk in 2d with stochastic reset to origin
 def qw2dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     
     import numpy as np
+    import time
+
+    start_time = time.time()
 
     if initState is None:
         initState = np.array([1, 0, 0, 0])
@@ -180,6 +197,9 @@ def qw2dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     msd_list /= n_simulations
     var_list /= n_simulations
 
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
+
     filename = f"qwalk2dreset_n{n}_nsim{n_simulations}_origin.npz"
 
     np.savez(
@@ -188,13 +208,17 @@ def qw2dresetorigin(n, coin, reset_r, n_simulations, initState=None):
         y=y,
         prob=np.array(prob_avg),
         msd=np.array(msd_list),
-        var=np.array(var_list)
+        var=np.array(var_list),
+        runtime=runtime
     )
 
 #quantum walk in 2d with stochastic reset to most probable position (mpp)
 def qw2dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     
     import numpy as np
+    import time
+
+    start_time = time.time()
 
     if initState is None:
         initState = np.array([1, 0, 0, 0])
@@ -254,6 +278,9 @@ def qw2dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     msd_list /= n_simulations
     var_list /= n_simulations
 
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
+
     filename = f"qwalk2dreset_n{n}_nsim{n_simulations}_mpp.npz"
 
     np.savez(
@@ -262,13 +289,17 @@ def qw2dresetmpp(n, coin, reset_r, n_simulations, initState=None):
         y=y,
         prob=np.array(prob_avg),
         msd=np.array(msd_list),
-        var=np.array(var_list)
+        var=np.array(var_list),
+        runtime=runtime
     )
 
 #quantum walk in 3d with stochastic reset to origin
 def qw3dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     
     import numpy as np
+    import time
+
+    start_time = time.time()
 
     if initState is None:
         initState = np.array([1, 0, 0, 0, 0, 0, 0, 0])
@@ -330,6 +361,9 @@ def qw3dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     prob_avg /= n_simulations
     msd_list /= n_simulations
     var_list /= n_simulations
+
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
     
     filename = f"qwalk3dreset_n{n}_nsim{n_simulations}_origin.npz"
 
@@ -340,13 +374,17 @@ def qw3dresetorigin(n, coin, reset_r, n_simulations, initState=None):
         z=z,
         prob=np.array(prob_avg),
         msd=np.array(msd_list),
-        var=np.array(var_list)
+        var=np.array(var_list),
+        runtime=runtime
     )
 
 #quantum walk in 3d with stochastic reset to most probable position (mpp)
 def qw3dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     
     import numpy as np
+    import time
+
+    start_time = time.time()
 
     if initState is None:
         initState = np.array([1, 0, 0, 0, 0, 0, 0, 0])
@@ -414,6 +452,9 @@ def qw3dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     prob_avg /= n_simulations
     msd_list /= n_simulations
     var_list /= n_simulations
+
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
     
     filename = f"qwalk3dreset_n{n}_nsim{n_simulations}_mpp.npz"
 
@@ -424,5 +465,6 @@ def qw3dresetmpp(n, coin, reset_r, n_simulations, initState=None):
         z=z,
         prob=np.array(prob_avg),
         msd=np.array(msd_list),
-        var=np.array(var_list)
+        var=np.array(var_list),
+        runtime=runtime
     )
