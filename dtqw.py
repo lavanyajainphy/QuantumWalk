@@ -2,6 +2,9 @@
 def qw1d(n, coin, initState=None):
     
     import numpy as np
+    import time
+
+    start_time = time.time()
 
     if initState is None:
         initState = np.array([[1], [0]])
@@ -33,6 +36,9 @@ def qw1d(n, coin, initState=None):
         msd = np.sum(x**2 * prob)
         msd_list.append(msd)
 
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
+
     filename = f"qwalk1d_n{n}.npz"
 
     np.savez(
@@ -40,7 +46,8 @@ def qw1d(n, coin, initState=None):
         x=x,
         prob=prob,
         var=np.array(var_list),
-        msd=np.array(msd_list)
+        msd=np.array(msd_list),
+        runtime=runtime
     )
 
 
@@ -48,6 +55,9 @@ def qw1d(n, coin, initState=None):
 def qw2d(n, coin, initState=None):
     
     import numpy as np
+    import time
+
+    start_time = time.time()
 
     if initState is None:
         initState = np.array([1, 0, 0, 0])
@@ -88,6 +98,9 @@ def qw2d(n, coin, initState=None):
         msd_list.append(msd)
         var_list.append(var)
 
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
+    
     filename = f"qwalk2d_n{n}.npz"
     np.savez(
         filename,
@@ -95,13 +108,18 @@ def qw2d(n, coin, initState=None):
         y=y,
         prob=prob,
         msd=np.array(msd_list),
-        var=np.array(var_list)
+        var=np.array(var_list),
+        runtime=runtime
     )
+
 
 #quantum walk in 3d
 def qw3d(n, coin, initState=None):
 
     import numpy as np
+    import time
+
+    start_time = time.time()
 
     if initState is None:
         initState = np.array([1, 0, 0, 0, 0, 0, 0, 0])
@@ -149,6 +167,9 @@ def qw3d(n, coin, initState=None):
         msd_list.append(msd)
         var_list.append(var)
 
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
+
     filename = f"qwalk3d_n{n}.npz"
     np.savez(
         filename,
@@ -157,5 +178,6 @@ def qw3d(n, coin, initState=None):
         z=z,
         prob=prob,
         msd=np.array(msd_list),
-        var=np.array(var_list)
+        var=np.array(var_list),
+        runtime=runtime
     )
