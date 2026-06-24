@@ -23,7 +23,7 @@ def rw1d(n, n_simulations):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"rwalk1d_n{n}.npz"
+    filename = f"rwalk1d_n{n}_nsim{n_simulations}.npz"
 
     np.savez(
         filename,
@@ -64,7 +64,7 @@ def rw2d(n, n_simulations):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"rwalk2d_n{n}.npz"
+    filename = f"rwalk2d_n{n}_nsim{n_simulations}.npz"
 
     np.savez(
         filename,
@@ -120,7 +120,7 @@ def rw3d(n, n_simulations):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"rwalk3d_n{n}.npz"
+    filename = f"rwalk3d_n{n}_nsim{n_simulations}.npz"
 
     np.savez(
         filename,
