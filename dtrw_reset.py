@@ -3,6 +3,9 @@ def rw1dreset(n, reset_r, n_simulations):
 
     import numpy as np
     import random
+    import time
+
+    start_time = time.time()
     
     position = np.zeros((n_simulations, n))
     for i in range(n_simulations):
@@ -22,11 +25,15 @@ def rw1dreset(n, reset_r, n_simulations):
     for i in range(n):
         msd[i] = np.mean(position[:, i]**2)
 
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
+
     filename = f"rwalk1dreset_n{n}.npz"
 
     np.savez(
         filename,
-        msd=np.array(msd)
+        msd=np.array(msd),
+        runtime=runtime
     )
 
 #random walk in 2d with stochastic resetting
@@ -34,6 +41,9 @@ def rw2dreset(n, reset_r, n_simulations):
 
     import numpy as np
     import random
+    import time
+
+    start_time = time.time()
     
     x = np.zeros((n_simulations, n))
     y = np.zeros((n_simulations, n))
@@ -61,19 +71,26 @@ def rw2dreset(n, reset_r, n_simulations):
     for i in range(n):
         msd[i] = np.mean(x[:, i]**2 + y[:, i]**2)
 
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
+
     filename = f"rwalk2dreset_n{n}.npz"
 
     np.savez(
         filename,
         x=x,
         y=y,
-        msd=np.array(msd)
+        msd=np.array(msd),
+        runtime=runtime
     )
 
 #random walk in 3d with stochastic resetting
 def rw3dreset(n, reset_r, n_simulations):
     import numpy as np
     import random
+    import time
+
+    start_time = time.time()
 
     x = np.zeros((n_simulations, n))
     y = np.zeros((n_simulations, n))
@@ -115,6 +132,9 @@ def rw3dreset(n, reset_r, n_simulations):
     for i in range(n):
         msd[i] = np.mean(x[:, i]**2 + y[:, i]**2 + z[:, i]**2)
 
+    runtime = time.time() - start_time
+    print(f"The runtime is {runtime}")
+
     filename = f"rwalk3dreset_n{n}.npz"
 
     np.savez(
@@ -122,5 +142,6 @@ def rw3dreset(n, reset_r, n_simulations):
         x=x,
         y=y,
         z=z,
-        msd=np.array(msd)
+        msd=np.array(msd),
+        runtime=runtime
     )
