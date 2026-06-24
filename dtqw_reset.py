@@ -54,7 +54,7 @@ def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"qwalk1dreset_n{n}_nsim{n_simulations}_origin.npz"
+    filename = f"qwalk1dreset_n{n}_nsim{n_simulations}_reset{reset_r}_origin.npz"
 
     np.savez(
         filename,
@@ -125,7 +125,7 @@ def qw1dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"qwalk1dreset_n{n}_nsim{n_simulations}_mpp.npz"
+    filename = f"qwalk1dreset_n{n}_nsim{n_simulations}_reset{reset_r}_mpp.npz"
 
     np.savez(
         filename,
@@ -200,7 +200,7 @@ def qw2dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"qwalk2dreset_n{n}_nsim{n_simulations}_origin.npz"
+    filename = f"qwalk2dreset_n{n}_nsim{n_simulations}_reset{reset_r}_origin.npz"
 
     np.savez(
         filename,
@@ -281,7 +281,7 @@ def qw2dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"qwalk2dreset_n{n}_nsim{n_simulations}_mpp.npz"
+    filename = f"qwalk2dreset_n{n}_nsim{n_simulations}_reset{reset_r}_mpp.npz"
 
     np.savez(
         filename,
@@ -365,7 +365,7 @@ def qw3dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
     
-    filename = f"qwalk3dreset_n{n}_nsim{n_simulations}_origin.npz"
+    filename = f"qwalk3dreset_n{n}_nsim{n_simulations}_reset{reset_r}_origin.npz"
 
     np.savez(
         filename,
@@ -456,7 +456,7 @@ def qw3dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
     
-    filename = f"qwalk3dreset_n{n}_nsim{n_simulations}_mpp.npz"
+    filename = f"qwalk3dreset_n{n}_nsim{n_simulations}_reset{reset_r}_mpp.npz"
 
     np.savez(
         filename,
