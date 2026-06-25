@@ -11,10 +11,10 @@ def plot_msd(files, labels, cutoffs, title):
         mask = steps <= cutoff
         alpha, logA = np.polyfit(np.log10(steps[mask]), np.log10(msd[mask]), 1)
         A=10**logA
-        plt.loglog(steps, msd, label=f"{label}, ($A={A:.3g}$, $\\alpha={alpha:.3f}$)")
+        plt.loglog(steps, msd, label=f"{label} ($A={A:.3g}$, $\\alpha={alpha:.3f}$)")
 
     plt.xlabel("Number of steps")
-    plt.ylabel("Mean square displacement")
+    plt.ylabel("Mean square displacement about Origin")
     plt.title(title)
     plt.legend()
 
@@ -30,9 +30,9 @@ def plot_var(files, labels, cutoffs, title):
         mask = steps <= cutoff
         alpha, logA = np.polyfit(np.log10(steps[mask]), np.log10(var[mask]), 1)
         A=10**logA
-        plt.loglog(steps, var, label=f"{label}, ($A={A:.3g}$, $\\alpha={alpha:.3f}$)")
+        plt.loglog(steps, var, label=f"{label} ($A={A:.3g}$, $\\alpha={alpha:.3f}$)")
 
     plt.xlabel("Number of steps")
-    plt.ylabel("Mean square displacement")
+    plt.ylabel("Mean square displacement about Mean")
     plt.title(title)
     plt.legend()
