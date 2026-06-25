@@ -26,7 +26,6 @@ def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
             if np.random.random() < reset_r:
                 psi = np.zeros((L, 2, 1), dtype=complex)
                 psi[center] = initState
-                print(f"Reset at {t} step for {m} walker")
 
             else:
                 for i in range(L):
@@ -97,7 +96,6 @@ def qw1dresetmpp(n, coin, reset_r, n_simulations, initState=None):
                 mpp=x[mpp_idx]
                 psi = np.zeros((L, 2, 1), dtype=complex)
                 psi[mpp_idx] = initState
-                print(f"Reset at {t} step for {m} walker at position {mpp}")
 
             else:
                 for i in range(L):
@@ -165,7 +163,6 @@ def qw2dresetorigin(n, coin, reset_r, n_simulations, initState=None):
             if np.random.random() < reset_r:
                 psi = np.zeros((L, L, 4), dtype=complex)
                 psi[center] = initState
-                print(f"Reset at {t} step for {m} walker")
 
             else:
                 for i in range(L):
@@ -246,7 +243,6 @@ def qw2dresetmpp(n, coin, reset_r, n_simulations, initState=None):
                 j = ys[k]
                 psi = np.zeros((L, L, 4), dtype=complex)
                 psi[i, j] = initState
-                print(f"Reset at {t} step for {m} walker at ({x[i]}, {y[j]})")
 
             else:
                 for i in range(L):
@@ -323,7 +319,6 @@ def qw3dresetorigin(n, coin, reset_r, n_simulations, initState=None):
             if np.random.random() < reset_r:
                 psi = np.zeros((L, L, L, 8), dtype=complex)
                 psi[center] = initState
-                print(f"Reset at {t} step for {m} walker")
 
             else:
                 for i in range(L):
@@ -414,7 +409,6 @@ def qw3dresetmpp(n, coin, reset_r, n_simulations, initState=None):
                 k = zs[max]
                 psi = np.zeros((L, L, L, 8), dtype=complex)
                 psi[i, j, k] = initState
-                print(f"Reset at {t} step for {m} walker at ({x[i]}, {y[j]}, {z[k]})")
 
             else:
                 for i in range(L):
