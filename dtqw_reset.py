@@ -7,7 +7,7 @@ def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     start_time = time.time()
 
     if initState is None:
-        initState = np.array([[1], [0]])
+        initState = np.array([1, 0])
     
     L = 2*n + 1
     center = L//2
@@ -18,13 +18,13 @@ def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
     prob_avg = np.zeros(L)
 
     for m in range(n_simulations):
-        psi = np.zeros((L, 2, 1), dtype=complex)
+        psi = np.zeros((L, 2), dtype=complex)
         psi[center] = initState
 
         for t in range(n):
 
             if np.random.random() < reset_r:
-                psi = np.zeros((L, 2, 1), dtype=complex)
+                psi = np.zeros((L, 2), dtype=complex)
                 psi[center] = initState
 
             else:
@@ -33,17 +33,17 @@ def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
 
                 psi_prev = psi.copy()
                 psi[:] = 0
-                psi[1:, 0, 0] = psi_prev [:-1, 0, 0]
-                psi[:-1, 1, 0] = psi_prev [1:, 1, 0]
+                psi[1:, 0] = psi_prev [:-1, 0]
+                psi[:-1, 1] = psi_prev [1:, 1]
 
-            prob = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
+            prob = np.sum(np.abs(psi)**2, axis=1)
             mean = np.sum(x * prob)
             var = np.sum(x**2 * prob) - mean**2
             msd = np.sum(x**2 * prob)
             msd_list [t] += msd
             var_list [t] += var
 
-        prob_final = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
+        prob_final = prob = np.sum(np.abs(psi)**2, axis=1)
         prob_avg += prob_final
 
     prob_avg /= n_simulations
@@ -73,7 +73,7 @@ def qw1dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     start_time = time.time()
 
     if initState is None:
-        initState = np.array([[1], [0]])
+        initState = np.array([1, 0])
     
     L = 2*n + 1
     center = L//2
@@ -84,17 +84,17 @@ def qw1dresetmpp(n, coin, reset_r, n_simulations, initState=None):
     prob_avg = np.zeros(L)
 
     for m in range(n_simulations):
-        psi = np.zeros((L, 2, 1), dtype=complex)
+        psi = np.zeros((L, 2), dtype=complex)
         psi[center] = initState
 
         for t in range(n):
 
             if np.random.random() < reset_r:
-                prob = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
+                prob = prob = np.sum(np.abs(psi)**2, axis=1)
                 maxima = np.where(prob == prob.max())[0]
                 mpp_idx = np.random.choice(maxima)
                 mpp=x[mpp_idx]
-                psi = np.zeros((L, 2, 1), dtype=complex)
+                psi = np.zeros((L, 2), dtype=complex)
                 psi[mpp_idx] = initState
 
             else:
@@ -103,17 +103,17 @@ def qw1dresetmpp(n, coin, reset_r, n_simulations, initState=None):
 
                 psi_prev = psi.copy()
                 psi[:] = 0
-                psi[1:, 0, 0] = psi_prev [:-1, 0, 0]
-                psi[:-1, 1, 0] = psi_prev [1:, 1, 0]
+                psi[1:, 0] = psi_prev [:-1, 0]
+                psi[:-1, 1] = psi_prev [1:, 1]
 
-            prob = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
+            prob = prob = np.sum(np.abs(psi)**2, axis=1)
             mean = np.sum(x * prob)
             var = np.sum(x**2 * prob) - mean**2
             msd = np.sum(x**2 * prob)
             msd_list [t] += msd
             var_list [t] += var
 
-        prob_final = np.abs(psi[:,0,0])**2 + np.abs(psi[:,1,0])**2
+        prob_final = prob = np.sum(np.abs(psi)**2, axis=1)
         prob_avg += prob_final
 
     prob_avg /= n_simulations
