@@ -45,7 +45,7 @@ def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
             msd_list [t] += msd
             var_list [t] += var
 
-        prob_final = prob = np.sum(np.abs(psi)**2, axis=1)
+        prob_final = np.sum(np.abs(psi)**2, axis=1)
         prob_avg += prob_final
 
     prob_avg /= n_simulations
@@ -110,7 +110,7 @@ def qw1dresetmpp(n, coin, reset_r, n_simulations, initState=None):
                 psi[1:, 0] = psi_prev [:-1, 0]
                 psi[:-1, 1] = psi_prev [1:, 1]
 
-            prob = prob = np.sum(np.abs(psi)**2, axis=1)
+            prob = np.sum(np.abs(psi)**2, axis=1)
             mean = np.sum(x * prob)
             var = np.sum(x**2 * prob) - mean**2
             msd = np.sum(x**2 * prob)
