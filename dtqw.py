@@ -21,8 +21,10 @@ def qw1d(n, coin, initState=None):
 
     for _ in range(n):
 
-        for i in range(L):
-            psi[i] = np.dot(coin, psi[i])
+        #for i in range(L):
+            #psi[i] = np.dot(coin, psi[i])
+
+        psi = psi @ coin.T
 
         psi_prev = psi.copy()
         psi[:] = 0
@@ -75,9 +77,11 @@ def qw2d(n, coin, initState=None):
 
     for _ in range(n):
 
-        for i in range(L):
-            for j in range(L):
-                psi[i, j] = np.dot(coin, psi[i, j])
+        #for i in range(L):
+            #for j in range(L):
+                #psi[i, j] = np.dot(coin, psi[i, j])
+
+        psi = psi @ coin.T
 
         psi_prev = psi.copy()
         psi[:] = 0
@@ -138,10 +142,12 @@ def qw3d(n, coin, initState=None):
     
     for _ in range(n):
 
-        for i in range(L):
-            for j in range(L):
-                for k in range(L):
-                    psi[i, j, k] = np.dot(coin, psi[i, j, k])
+        #for i in range(L):
+            #for j in range(L):
+                #for k in range(L):
+                    #psi[i, j, k] = np.dot(coin, psi[i, j, k])
+
+        psi = psi @ coin.T
 
         psi_prev = psi.copy()
         psi[:] = 0
