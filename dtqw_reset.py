@@ -28,8 +28,10 @@ def qw1dresetorigin(n, coin, reset_r, n_simulations, initState=None):
                 psi[center] = initState
 
             else:
-                for i in range(L):
-                        psi[i] = np.dot(coin, psi[i])
+                #for i in range(L):
+                        #psi[i] = np.dot(coin, psi[i])
+
+                psi = psi @ coin.T
 
                 psi_prev = psi.copy()
                 psi[:] = 0
@@ -98,8 +100,10 @@ def qw1dresetmpp(n, coin, reset_r, n_simulations, initState=None):
                 psi[mpp_idx] = initState
 
             else:
-                for i in range(L):
-                        psi[i] = np.dot(coin, psi[i])
+                #for i in range(L):
+                        #psi[i] = np.dot(coin, psi[i])
+
+                psi = psi @ coin.T
 
                 psi_prev = psi.copy()
                 psi[:] = 0
@@ -165,9 +169,11 @@ def qw2dresetorigin(n, coin, reset_r, n_simulations, initState=None):
                 psi[center] = initState
 
             else:
-                for i in range(L):
-                    for j in range(L):
-                        psi[i, j] = np.dot(coin, psi[i, j])
+                #for i in range(L):
+                    #for j in range(L):
+                        #psi[i, j] = np.dot(coin, psi[i, j])
+
+                psi = psi @ coin.T
 
                 psi_prev = psi.copy()
                 psi[:] = 0
@@ -245,9 +251,11 @@ def qw2dresetmpp(n, coin, reset_r, n_simulations, initState=None):
                 psi[i, j] = initState
 
             else:
-                for i in range(L):
-                    for j in range(L):
-                        psi[i, j] = np.dot(coin, psi[i, j])
+                #for i in range(L):
+                    #for j in range(L):
+                        #psi[i, j] = np.dot(coin, psi[i, j])
+
+                psi = psi @ coin.T
 
                 psi_prev = psi.copy()
                 psi[:] = 0
@@ -321,10 +329,12 @@ def qw3dresetorigin(n, coin, reset_r, n_simulations, initState=None):
                 psi[center] = initState
 
             else:
-                for i in range(L):
-                    for j in range(L):
-                        for k in range(L):
-                            psi[i, j, k] = np.dot(coin, psi[i, j, k])
+                #for i in range(L):
+                    #for j in range(L):
+                        #for k in range(L):
+                            #psi[i, j, k] = np.dot(coin, psi[i, j, k])
+
+                psi = psi @ coin.T
 
                 psi_prev = psi.copy()
                 psi[:] = 0
@@ -411,10 +421,12 @@ def qw3dresetmpp(n, coin, reset_r, n_simulations, initState=None):
                 psi[i, j, k] = initState
 
             else:
-                for i in range(L):
-                    for j in range(L):
-                        for k in range(L):
-                            psi[i, j, k] = np.dot(coin, psi[i, j, k])
+                #for i in range(L):
+                    #for j in range(L):
+                        #for k in range(L):
+                            #psi[i, j, k] = np.dot(coin, psi[i, j, k])
+
+                psi = psi @ coin.T
 
                 psi_prev = psi.copy()
                 psi[:] = 0
