@@ -41,6 +41,7 @@ def qw2dgraph(n, coin, marked, L):
     print("Marked (x,y):", marked)
     for coord, idx in zip(marked, marked_idx):
         print(f"P{coord} = {prob[idx]}")
+    print(f"P(marked) = {sum(prob[idx] for idx in marked_idx)}")
 
     success_prob = np.array(success_prob)
     plt.figure()
