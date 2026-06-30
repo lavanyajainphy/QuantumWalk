@@ -11,6 +11,13 @@ def coin2d(theta, phi1, phi2):
     return np.kron(c1, c1)
 #only valid for hadamard coin, this is a general seperable coin
 
+def coin2dgrover():
+    import numpy as np
+    return 0.5*np.array([[-1,  1,  1,  1],
+                         [ 1, -1,  1,  1],
+                         [ 1,  1, -1,  1],
+                         [ 1,  1,  1, -1]])
+
 def coin3d(theta, phi1, phi2):
     import numpy as np
     c1 = np.array([[np.cos(theta), (np.sin(theta) * np.exp(1j*phi1))], [(np.sin(theta) * np.exp(1j*phi2)), -(np.cos(theta) * np.exp(1j*(phi1 + phi2)))]])
