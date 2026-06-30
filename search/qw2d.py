@@ -1,4 +1,4 @@
-def qw2d(n, coin, marked, L):
+def qw2dgraph(n, coin, marked, L):
   
     import numpy as np
     import time
