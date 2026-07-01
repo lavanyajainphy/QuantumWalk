@@ -11,6 +11,7 @@ def qw2dgraph(n, coin, marked, L):
 
     psi = np.ones((L, L, 4), dtype=complex) #begin w an equal superposition
     psi /= np.linalg.norm(psi)
+    marked_coin = -coin
     
     success_prob = []
 
@@ -18,7 +19,6 @@ def qw2dgraph(n, coin, marked, L):
 
         psi_prev = psi.copy()
         psi = psi_prev @ coin.T
-        marked_coin = -coin
         for m in marked_idx:
             psi[m] = psi_prev[m] @ marked_coin.T
 
