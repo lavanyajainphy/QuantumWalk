@@ -68,7 +68,7 @@ def qw2dgraph(n, coin, marked, L):
     plt.colorbar(im, label='Probability')
     plt.xlabel("x")
     plt.ylabel("y")
-    plt.title("Probability of Different Positions in 2D Quantum Walk")
+    plt.title(f"Probability of Different Positions in 2D Quantum Walk after {n} steps")
     plt.show()
 
     runtime = time.time() - start_time
