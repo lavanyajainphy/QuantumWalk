@@ -49,6 +49,7 @@ def qw2dgraph(n, coin, marked, L):
         plt.plot(success_prob[:, i], label=f"{m}")
     plt.xlabel("Number of Steps")
     plt.ylabel("Probability of Marked Point(s)")
+    plt.title("Probability of finding the walker at the Marked Node(s)")
     plt.legend()
     plt.show()
 
