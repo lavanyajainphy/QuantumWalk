@@ -25,10 +25,10 @@ def qw2dgraph(n, coin, marked, L):
         psi_prev = psi.copy()
         psi[:] = 0
         #w flipping of coin state, periodic boundary conditions
-        psi[:, :, 1] = np.roll(psi_prev[:, :, 0], 1, axis=0) #up
-        psi[:, :, 0] = np.roll(psi_prev[:, :, 1], -1, axis=0) #down
-        psi[:, :, 3] = np.roll(psi_prev[:, :, 2], 1, axis=1) #left
-        psi[:, :, 2] = np.roll(psi_prev[:, :, 3], -1, axis=1) #right
+        psi[:, :, 1] = np.roll(psi_prev[:, :, 0], 1, axis=0) #up up spin state, shifts up, changes coin state to down up
+        psi[:, :, 0] = np.roll(psi_prev[:, :, 1], -1, axis=0) #down up spin state, shifts down, changes coin state to up up
+        psi[:, :, 3] = np.roll(psi_prev[:, :, 2], 1, axis=1) #up down spin state, shifts right, changes coin state to down down
+        psi[:, :, 2] = np.roll(psi_prev[:, :, 3], -1, axis=1) #down down spin state, shifts left, changes coin state to up down
 
         prob = np.sum(np.abs(psi)**2, axis = 2)
         success_prob.append([prob[m] for m in marked_idx])
@@ -56,7 +56,7 @@ def qw2dgraph(n, coin, marked, L):
     x_coords = np.arange(L) - center[1]
     y_coords = np.arange(L) - center[0]
 
-    dx = x_coords[1] - x_coords[0]  # =1 here, but written generally
+    dx = x_coords[1] - x_coords[0] 
     dy = y_coords[1] - y_coords[0]
 
     extent = [x_coords[0] - dx/2, x_coords[-1] + dx/2,
