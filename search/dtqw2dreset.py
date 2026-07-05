@@ -1,4 +1,4 @@
-def qw2dgraph_sharpreset_origin(n, coin, marked, L, resetstep):
+def qw2dgraph_sharpreset_initstate(n, coin, marked, L, resetstep):
   
     import numpy as np
     import time
