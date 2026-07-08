@@ -1,11 +1,17 @@
-def qw2d(n, L, n_simulations, coin, marked, tau, reset=None, r=None, radius=None):
+def qw2d(n, L, n_simulations, marked, tau, coin=None, reset=None, r=None, radius=None):
   
     import numpy as np
     import time
     import matplotlib.pyplot as plt
 
     start_time = time.time()
-  
+
+    if coin is None:
+        return 0.5*np.array([[-1,  1,  1,  1],
+                             [ 1, -1,  1,  1],
+                             [ 1,  1, -1,  1],
+                             [ 1,  1,  1, -1]])
+      
     center = L//2, L//2
     marked_idx = [(center[0] + y, center[1] + x) for x, y in marked]
     marked_coin = -np.identity(4)
@@ -39,6 +45,7 @@ def qw2d(n, L, n_simulations, coin, marked, tau, reset=None, r=None, radius=None
 
             if (t + 1) % tau == 0:
                 attempt += 1
+                attempts_since_reset += 1
 
                 for m in marked_idx:
 
@@ -59,12 +66,14 @@ def qw2d(n, L, n_simulations, coin, marked, tau, reset=None, r=None, radius=None
                     break  
 
                 if reset == "Uniform Superposition":
+                    reset_type = "UniSup"
                     if attempts_since_reset == r: 
                         psi = np.ones((L, L, 4), dtype=complex) #begin w an equal superposition
                         psi /= np.linalg.norm(psi)
                         attempts_since_reset = 0
 
                 if reset == "Projective Measurement":
+                    reset_type = "PM"
                     if attempts_since_reset == r: 
                         position_prob = np.sum(np.abs(psi)**2, axis=2)
                         flat_prob = position_prob.ravel()
@@ -78,6 +87,7 @@ def qw2d(n, L, n_simulations, coin, marked, tau, reset=None, r=None, radius=None
                         attempts_since_reset = 0
 
                 if reset == "Localised Superposition around Projective Measurement":
+                    reset_type = "LocalSup_PM"
                     if attempts_since_reset == r: 
                         position_prob = np.sum(np.abs(psi)**2, axis=2)
                         flat_prob = position_prob.ravel()
@@ -94,6 +104,7 @@ def qw2d(n, L, n_simulations, coin, marked, tau, reset=None, r=None, radius=None
                         attempts_since_reset = 0
 
                 if reset == "Most Probable Position":
+                    reset_type = "MPP"
                     if attempts_since_reset == r: 
                         prob = np.sum(np.abs(psi)**2, axis = 2)
                         xs, ys = np.where(prob == prob.max())
@@ -107,6 +118,7 @@ def qw2d(n, L, n_simulations, coin, marked, tau, reset=None, r=None, radius=None
                         attempts_since_reset = 0
 
                 if reset == "Localised Superposition around Most Probable Position":
+                    reset_type = "LocalSup_MPP"
                     if attempts_since_reset == r: 
                         prob = np.sum(np.abs(psi)**2, axis = 2)
                         xs, ys = np.where(prob == prob.max())
@@ -126,10 +138,29 @@ def qw2d(n, L, n_simulations, coin, marked, tau, reset=None, r=None, radius=None
     Fn /= n_simulations
     Pdet = np.cumsum(Fn)
 
-    plt.plot(Pdet)
-    plt.xlabel("Measurement attempt")
-    plt.ylabel("Cumulative detection probability")
-    plt.show()
+    if reset is None:
+        reset_type = "NA"
+
+    if r is None:
+        r = "NA"
+
+    if radius is None:
+        radius = "NA"
 
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
+
+    filename = f"qwalk2dsearch_n{n}_nsim{n_simulations}_reset{reset_type}_r{r}_radius{radius}.npz"
+
+    np.savez(
+        filename,
+        n=n, 
+        n_simulations=n_simulations,
+        reset_type=reset_type,
+        r=r,
+        tau=tau,
+        radius=radius,
+        Fn=Fn,
+        Pdet=Pdet,
+        runtime=runtime
+    )  
