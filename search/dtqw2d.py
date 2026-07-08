@@ -1,4 +1,4 @@
-def qw2d(n, L, n_simulations, marked, tau, coin=None, reset=None, r=None, radius=None):
+def qw2d(n, L, n_simulations, marked, tau, reset=None, r=None, radius=None, coin=None):
   
     import numpy as np
     import time
