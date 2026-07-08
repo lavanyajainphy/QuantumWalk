@@ -2,7 +2,6 @@ def qw2d(n, L, n_simulations, marked, tau, coin=None, reset=None, r=None, radius
   
     import numpy as np
     import time
-    import matplotlib.pyplot as plt
 
     start_time = time.time()
 
@@ -126,7 +125,6 @@ def qw2d(n, L, n_simulations, marked, tau, coin=None, reset=None, r=None, radius
                         i = xs[k]
                         j = ys[k]
                         psi[:] = 0
-                        radius = 10
                         for di in range(-radius, radius + 1):
                             for dj in range(-radius, radius + 1):
                                 x = (i + di) % L
