@@ -7,7 +7,7 @@ def qw2d(n, L, n_simulations, marked, tau, coin=None, reset=None, r=None, radius
     start_time = time.time()
 
     if coin is None:
-        return 0.5*np.array([[-1,  1,  1,  1],
+        coin = 0.5*np.array([[-1,  1,  1,  1],
                              [ 1, -1,  1,  1],
                              [ 1,  1, -1,  1],
                              [ 1,  1,  1, -1]])
