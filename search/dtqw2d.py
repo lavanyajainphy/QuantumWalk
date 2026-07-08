@@ -46,20 +46,20 @@ def qw2d(n, L, n_simulations, marked, tau, coin=None, reset=None, r=None, radius
                 attempt += 1
                 attempts_since_reset += 1
 
-                for m in marked_idx:
+                marked_prob = sum(prob[m] for m in marked_idx)
 
-                    node_prob = prob[m]
+                if np.random.rand() < marked_prob:
+                    print(f"Detected a marked node at {t+1}")
+                    detected_idx = np.random.choice(len(marked_idx), p=marked_probs / total_marked_prob)
+                    detected_node = marked_idx[detected_idx]
+                    print(f"Found marked node {detected_node} at {t+1}")
+                    Fn[attempt - 1] += 1
+                    detected = True
 
-                    if np.random.rand() < node_prob:
-                        print(f"Found marked node {m} at {t+1}")
-                        hitting_time = attempt * tau
-                        Fn [attempt-1] += 1
-                        detected = True
-                        break
-            
-                    else:
-                        psi[m] = 0
-                        psi /= np.linalg.norm(psi)  
+                else:
+                    for m in marked_idx:
+                    psi[m] = 0
+                    psi /= np.linalg.norm(psi)
 
                 if detected:
                     break  
