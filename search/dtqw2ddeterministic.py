@@ -1,7 +1,8 @@
-def qw2d(n, L, marked, tau, reset=None, r=None, radius=None, coin=None):
+def qw2d(n, L, marked, tau, label, reset=None, r=None, radius=None, coin=None):
 
     import numpy as np
     import time
+    import matplotlib.pyplot as plt
 
     start_time = time.time()
 
@@ -10,13 +11,10 @@ def qw2d(n, L, marked, tau, reset=None, r=None, radius=None, coin=None):
             [-1,  1,  1,  1],
             [ 1, -1,  1,  1],
             [ 1,  1, -1,  1],
-            [ 1,  1,  1, -1]
-        ])
+            [ 1,  1,  1, -1]])
 
     center = L//2, L//2
-    marked_idx = [(center[0] + y, center[1] + x) for x, y in marked]
-
-    #marked_coin = -np.identity(4)
+    marked_idx = [(center[0] + y, center[1] + x)for x, y in marked]
     marked_coin = -coin
 
     num_measurements = n // tau
@@ -31,7 +29,7 @@ def qw2d(n, L, marked, tau, reset=None, r=None, radius=None, coin=None):
     survival_prob = 1.0
 
     for t in range(n):
-      
+
         psi_prev = psi.copy()
         psi = psi_prev @ coin.T
         for m in marked_idx:
@@ -39,12 +37,11 @@ def qw2d(n, L, marked, tau, reset=None, r=None, radius=None, coin=None):
 
         psi_prev = psi.copy()
         psi[:] = 0
-      
-        #w flipping of coin state, periodic boundary conditions
-        psi[:, :, 1] = np.roll(psi_prev[:, :, 0], 1, axis=0) #up up spin state, shifts up, changes coin state to down up
-        psi[:, :, 0] = np.roll(psi_prev[:, :, 1], -1, axis=0) #down up spin state, shifts down, changes coin state to up up
-        psi[:, :, 3] = np.roll(psi_prev[:, :, 2], 1, axis=1) #up down spin state, shifts right, changes coin state to down down
-        psi[:, :, 2] = np.roll(psi_prev[:, :, 3], -1, axis=1) #down down spin state, shifts left, changes coin state to up down
+
+        psi[:, :, 1] = np.roll(psi_prev[:, :, 0], 1, axis=0)
+        psi[:, :, 0] = np.roll(psi_prev[:, :, 1], -1, axis=0)
+        psi[:, :, 3] = np.roll(psi_prev[:, :, 2], 1, axis=1)
+        psi[:, :, 2] = np.roll(psi_prev[:, :, 3], -1, axis=1)
 
         if (t + 1) % tau == 0:
 
@@ -54,16 +51,19 @@ def qw2d(n, L, marked, tau, reset=None, r=None, radius=None, coin=None):
             prob = np.sum(np.abs(psi)**2, axis=2)
 
             marked_probs = np.array([prob[m] for m in marked_idx])
-
             total_marked_prob = marked_probs.sum()
 
-            #deterministic detection
             Fn[attempt - 1] = (survival_prob * total_marked_prob)
+
             survival_prob *= (1 - total_marked_prob)
 
             for m in marked_idx:
                 psi[m] = 0
             psi /= np.linalg.norm(psi)
+
+            #norm = np.linalg.norm(psi)
+            #if norm > 0:
+                #psi /= norm
 
             if reset == "Uniform Superposition":
                 reset_type = "UniSup"
@@ -72,10 +72,11 @@ def qw2d(n, L, marked, tau, reset=None, r=None, radius=None, coin=None):
                     psi /= np.linalg.norm(psi)
                     attempts_since_reset = 0
 
+
             if reset == "Localised Superposition around Most Probable Position":
                 reset_type = "LocalSup_MPP"
                 if attempts_since_reset == r:
-                    prob = np.sum(np.abs(psi)**2, axis = 2)
+                    prob = np.sum(np.abs(psi)**2, axis=2)
                     xs, ys = np.where(prob == prob.max())
                     k = np.random.randint(len(xs))
                     i = xs[k]
