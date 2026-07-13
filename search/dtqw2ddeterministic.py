@@ -1,8 +1,7 @@
-def qw2d(n, L, marked, tau, label, reset=None, r=None, radius=None, coin=None):
+def qw2d(n, L, marked, tau, reset=None, r=None, radius=None, coin=None):
 
     import numpy as np
     import time
-    import matplotlib.pyplot as plt
 
     start_time = time.time()
 
