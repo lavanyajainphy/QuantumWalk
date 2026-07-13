@@ -77,8 +77,9 @@ def qw2d(n, L, marked, tau, reset=None, r=None, radius=None, coin=None):
                 if attempts_since_reset == r:
                     prob = np.sum(np.abs(psi)**2, axis = 2)
                     xs, ys = np.where(prob == prob.max())
-                    i = xs[0]
-                    j = ys[0]
+                    k = np.random.randint(len(xs))
+                    i = xs[k]
+                    j = ys[k]
                     psi[:] = 0
                     for di in range(-radius, radius + 1):
                         for dj in range(-radius, radius + 1):
