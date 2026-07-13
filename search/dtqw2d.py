@@ -13,7 +13,8 @@ def qw2d(n, L, n_simulations, marked, tau, reset=None, r=None, radius=None, coin
       
     center = L//2, L//2
     marked_idx = [(center[0] + y, center[1] + x) for x, y in marked]
-    marked_coin = -np.identity(4)
+    #marked_coin = -np.identity(4)
+    marked_coin = -coin
 
     num_measurements = n // tau
     Fn = np.zeros(num_measurements)
