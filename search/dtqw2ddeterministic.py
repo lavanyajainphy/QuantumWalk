@@ -109,7 +109,7 @@ def qw2d(n, L, marked, tau, reset=None, r=None, radius=None, coin=None):
         filename,
         n=n,
         L=L,
-        marked=marked
+        marked=marked,
         reset_type=reset_type,
         r=r,
         tau=tau,
