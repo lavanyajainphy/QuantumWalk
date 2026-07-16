@@ -4,7 +4,7 @@ def plot_pdet(files, labels, title):
     import matplotlib.pyplot as plt
 
     for file, label in zip(files, labels):
-        pdet = np.load(file)["pdet"]
+        pdet = np.load(file)["Pdet"]
         n = np.load(file)["n"]
         tau = np.load(file)["tau"]
         time_steps = np.arange(tau, n + 1, tau)
