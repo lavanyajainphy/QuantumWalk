@@ -1,4 +1,4 @@
-def plot_pdet(files, labels, title):
+def plot_Pdet(files, labels, title):
 
     import numpy as np
     import matplotlib.pyplot as plt
