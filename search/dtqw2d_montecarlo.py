@@ -149,12 +149,13 @@ def qw2d(n, L, n_simulations, marked, tau, reset=None, r=None, radius=None, coin
     runtime = time.time() - start_time
     print(f"The runtime is {runtime}")
 
-    filename = f"qwalk2dsearch_n{n}_nsim{n_simulations}_reset{reset_type}_r{r}_radius{radius}.npz"
+    filename = f"qwalk2dsearch_n{n}_L{L}_reset{reset_type}_r{r}_radius{radius}_marked{marked_str}.npz"
 
     np.savez(
         filename,
-        n=n, 
-        n_simulations=n_simulations,
+        n=n,
+        L=L,
+        marked=marked,
         reset_type=reset_type,
         r=r,
         tau=tau,
@@ -162,4 +163,4 @@ def qw2d(n, L, n_simulations, marked, tau, reset=None, r=None, radius=None, coin
         Fn=Fn,
         Pdet=Pdet,
         runtime=runtime
-    )  
+    )
