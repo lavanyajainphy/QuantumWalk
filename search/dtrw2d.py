@@ -9,19 +9,19 @@ def rw2d(n, L, n_simulations, marked, tau, reset=None, r=None):
     center = L//2, L//2
     marked_idx = [(center[0] + j, center[1] + i) for i, j in marked]
 
-    x = np.zeros((n_simulations, n))
-    y = np.zeros((n_simulations, n))
+    x = np.zeros((n_simulations, n+1))
+    y = np.zeros((n_simulations, n+1))
 
     x[:, 0] = center[1]
     y[:, 0] = center[0]
 
-    num_measurements = (n-1) // tau
+    num_measurements = n // tau
     Fn = np.zeros(num_measurements)
 
     for i in range(n_simulations):
         attempt = 0
         attempts_since_reset = 0
-        for j in range (1, n):
+        for j in range (1, n+1):
             direction = random.randint(1, 4)
             if direction == 1:
                 x[i, j]= x[i, j-1]+1
